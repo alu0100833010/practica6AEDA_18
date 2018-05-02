@@ -44,8 +44,13 @@ class nodoBB_t {
         nodoBB_t<clave>*& get_colision(void) {
             return colision;
         }
+        
+        // MODIFICACION
         colision_t suma_colision(void) {
             colision.numero_colision();
+        }
+        colision_t resta_colision(void) {
+            colision.menos_colision();
         }
         clave& get_nodo_valor(void) { 
             return valor;

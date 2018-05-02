@@ -13,4 +13,5 @@ class colision_t {
         colision_t(void);
         ~colision_t(void);
         void numero_colision (void);
+        void menos_colision (void);
 };

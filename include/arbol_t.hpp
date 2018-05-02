@@ -110,7 +110,7 @@ void ABB_t<clave>::insertar_rama(nodoBB_t<clave>*& nodo, clave x) {
         
     } else if (x > nodo->get_nodo_valor()) {
         insertar_rama(nodo->get_nodo_dch(), x);
-        
+    // Modificacion    
     } else if (x == nodo->get_nodo_valor()) {
         nodo->suma_colision();
     }
@@ -125,6 +125,8 @@ void ABB_t<clave>::eliminar_rama(nodoBB_t<clave>*& nodo, clave x) {
     } else if(x > nodo->get_nodo_valor()) {
         eliminar_rama(nodo->get_nodo_dch(), x);
         
+    } else if (x == nodo->get_nodo_valor()) {
+        nodo->resta_colision();
     } else {
         nodoBB_t<clave>* eliminado = nodo;
         
@@ -134,7 +136,7 @@ void ABB_t<clave>::eliminar_rama(nodoBB_t<clave>*& nodo, clave x) {
         } else if(nodo->get_nodo_izq() == NULL){
            nodo = nodo->get_nodo_dch();
             
-        } else{
+        } else {
             sustituye(eliminado, nodo->get_nodo_izq());
         }
         delete eliminado;
@@ -144,11 +146,9 @@ void ABB_t<clave>::eliminar_rama(nodoBB_t<clave>*& nodo, clave x) {
 template<class clave>
 void ABB_t<clave>::sustituye(nodoBB_t<clave>*& eliminado, nodoBB_t<clave>*& sust) {
     if (sust->get_nodo_dch() != NULL) {
-       // cout << "SUSTITUIR 1 --> " << sust -> get_nodo_valor() << endl;
        sustituye(eliminado, sust->get_nodo_dch());
 
     } else {
-        //cout << "SUSTITUIR 2 --> " << sust -> get_nodo_valor() << endl;
        eliminado-> get_nodo_valor() = sust -> get_nodo_valor();
        eliminado = sust;
        sust = sust-> get_nodo_izq();
@@ -157,12 +157,6 @@ void ABB_t<clave>::sustituye(nodoBB_t<clave>*& eliminado, nodoBB_t<clave>*& sust
 
 template<class clave>
 nodoBB_t<clave>* ABB_t<clave>::buscar_rama(nodoBB_t<clave>* nodo, clave x) {
-    // Si x es menor o igual que la raiz, la búsqueda prosigue de manera
-    // recursiva por el subárbol izquierdo.
-    // Si x es mayor que la raiz, la búsqueda prosigue de manera
-    // recursiva por el subárbol derecho.
-    // La búsqueda se termina cuando se encuentra el elemento o
-    // cuando ya no quedan más nodos por visitar.
     if(nodo == NULL) return NULL;
     if(x == nodo->get_nodo_valor()) return nodo;
     if(x < nodo-> get_nodo_valor()) return buscar_rama(nodo->get_nodo_izq(), x);

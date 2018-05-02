@@ -8,3 +8,8 @@ void colision_t::numero_colision (void) {
     colision_++;
     cout << "COLISIONES: " << colision_ << endl;
 }
+
+void colision_t::menos_colision (void) { 
+    colision_--;
+    cout << "COLISIONES: " << colision_ << endl;
+}
